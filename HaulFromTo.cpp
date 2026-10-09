@@ -946,7 +946,11 @@ static bool CharacterHasMatchingHaulPermaJob(Character* c)
     Tasker** pa = *(Tasker***)(base + 0x98);
 
     if (pc < 0 || pc > 64 || pa == NULL || !IsValidPtr(pa))
-        return false;
+    {
+        HFTTrace("Perma-job list unavailable for " + CharacterName(c)
+            + " | pc=" + IntStr(pc) + " | assuming matching job row still exists");
+        return true;
+    }
 
     for (int i = 0; i < pc; ++i)
     {
